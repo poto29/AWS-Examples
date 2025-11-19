@@ -42,3 +42,10 @@ RUN wget -O- https://apt.releases.hashicorp.com/gpg \
     apt-get update && \
     apt-get install -y terraform && \
     rm -rf /var/lib/apt/lists/*
+
+# Install npm
+RUN apt-get update && \
+    apt-get install -y nodejs npm
+
+# Install cdk
+RUN npm i -g aws-cdk
