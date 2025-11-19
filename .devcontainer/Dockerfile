@@ -11,3 +11,19 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 
 ENV AWS_CLI_AUTO_PROMPT=on-partial
 
+# Install ruby
+RUN apt-get update && \
+    apt-get install -y ruby-full && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install Bundler
+RUN gem install bundler
+
+# To easily use ruby, run these commands after the environment is rebuilded, do not add in to run in Dockerfile
+# bundle config set --local path '/workspaces/AWS-Examples/s3/sdk/ruby/vendor/bundle'
+# bundle install
+
+# Install Java
+RUN apt-get update && \
+    apt-get install -y default-jre && \
+    rm -rf /var/lib/apt/lists/*
