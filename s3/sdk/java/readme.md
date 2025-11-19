@@ -6,3 +6,9 @@ mvn archetype:generate \
 -DinteractiveMode=false
 
 
+mvn -B archetype:generate \
+ -DarchetypeGroupId=software.amazon.awssdk \
+ -DarchetypeArtifactId=archetype-lambda -Dservice=s3 -Dregion=EU_NORTH_1 \
+ -DarchetypeVersion=2.38.9 \
+ -DgroupId=com.example.myapp \
+ -DartifactId=myapp

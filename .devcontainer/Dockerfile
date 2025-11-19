@@ -27,3 +27,8 @@ RUN gem install bundler
 RUN apt-get update && \
     apt-get install -y default-jre && \
     rm -rf /var/lib/apt/lists/*
+
+# Install Maven
+RUN apt-get update && \
+    apt-get install maven \
+    rm -rf /var/lib/apt/lists/*

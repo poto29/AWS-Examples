@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+
+STACK_NAME="cfn-s3-simple"
+aws cloudformation deploy \
+    --template-file iac/cfn/template.yaml \
+    --region eu-north-1 \
+    --stack-name $STACK_NAME 
