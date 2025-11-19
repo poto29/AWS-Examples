@@ -1,0 +1,25 @@
+#! /usr/bin/env bash
+
+# 1st param: bucket name parameter
+if [ -z "$1" ]; then
+    echo "There needs to be a bucket name"
+    exit 1
+fi
+
+BUCKET_NAME=$1
+
+# 2nd param: filename
+if [ -z "$2" ]; then
+    echo "There needs to be a filename"
+    exit 1
+fi
+
+FILENAME=$2
+
+OBJECT_KEY=$(basename "$FILENAME")
+
+aws s3api put-object \
+    --bucket $BUCKET_NAME \
+    --key $OBJECT_KEY \
+    --body $FILENAME
+

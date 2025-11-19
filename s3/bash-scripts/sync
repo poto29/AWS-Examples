@@ -1,0 +1,37 @@
+#! /usr/bin/env bash
+
+set -e
+
+# 1st param: bucket name parameter
+if [ -z "$1" ]; then
+    echo "There needs to be a bucket name"
+    exit 1
+fi
+
+BUCKET_NAME=$1
+
+# 2nd param: file prefix parameter
+if [ -z "$2" ]; then
+    echo "There needs to be a filename prefix"
+    exit 1
+fi
+
+FILENAME_PREFIX=$2
+
+OUTPUT_DIR="/tmp/s3-scripts"
+
+rm -r $OUTPUT_DIR
+
+mkdir -p $OUTPUT_DIR
+
+NUM_FILES=$((RANDOM % 6 + 5))
+
+for ((i=1; i<=$NUM_FILES; i++)); do
+    RANDOM_FILE="$OUTPUT_DIR/${FILENAME_PREFIX}_$i.txt"
+    base64 < /dev/urandom | head -c 100 > $RANDOM_FILE
+    echo "Generat: $RANDOM_FILE"
+done
+
+tree $OUTPUT_DIR
+
+aws s3 sync $OUTPUT_DIR s3://$BUCKET_NAME/files
