@@ -1,0 +1,13 @@
+#! /usr/bin/env bash
+
+aws s3 mb s3://metadata-bucket-ap-2094
+
+echo "Hello Mars!" > hello.txt
+
+aws s3api put-object --bucket metadata-bucket-ap-2094 --key hello.txt --body hello.txt --metadata Planet=Mars
+
+aws s3api head-object --bucket metadata-bucket-ap-2094 --key hello.txt
+
+aws s3 rm s3://metadata-bucket-ap-2094/hello.txt
+
+aws s3api delete-bucket --bucket metadata-bucket-ap-2094
