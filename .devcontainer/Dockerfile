@@ -49,3 +49,12 @@ RUN apt-get update && \
 
 # Install cdk
 RUN npm i -g aws-cdk
+
+RUN apt-get update && \
+    apt-get install curl
+    
+RUN apt-get update && \
+    apt-get install -y curl && \
+    curl -sSL https://get.pulumi.com | sh
+
+ENV PATH="$HOME/.pulumi/bin:$PATH"
